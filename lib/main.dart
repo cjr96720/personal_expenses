@@ -30,9 +30,14 @@ class MyHomePage extends StatelessWidget {
     )
   ];
 
+  final titleController = TextEditingController();
+  final amountContoller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // To avoud button overflow by pixels problem
+      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Personal Expenses'),
         backgroundColor: Colors.blue[900],
@@ -46,6 +51,31 @@ class MyHomePage extends StatelessWidget {
               child: Text('Chart!'),
             ),
           ),
+          // Transaction input field ==============================
+          Card(
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(labelText: 'Title'),
+                  controller: titleController,
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Amount'),
+                  controller: amountContoller,
+                ),
+                FlatButton(
+                  child: Text('Add'),
+                  textColor: Colors.blue[900],
+                  onPressed: () {
+                    print(titleController.text);
+                    print(amountContoller.text);
+                  },
+                ),
+              ],
+            ),
+          ),
+          // Transaction input field ==============================
+          // Transaction cards ==============================
           Column(
             children: transactions.map((transaction) {
               return Card(
@@ -78,15 +108,18 @@ class MyHomePage extends StatelessWidget {
                           transaction.title,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 15,
                           ),
                         ),
-                        Text(DateFormat('yyyy-MM-dd').format(transaction.date),
-                            style: TextStyle(
-                              color: Colors.grey,
-                            )),
+                        Text(
+                          DateFormat.yMMMd().format(transaction.date),
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
                       ],
                     ),
+                    // Transaction cards ==============================
                   ],
                 ),
               );
