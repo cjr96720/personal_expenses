@@ -81,7 +81,7 @@ class MyHomePage extends StatelessWidget {
                             fontSize: 18,
                           ),
                         ),
-                        Text(DateFormat().format(transaction.date),
+                        Text(DateFormat('yyyy-MM-dd').format(transaction.date),
                             style: TextStyle(
                               color: Colors.grey,
                             )),
